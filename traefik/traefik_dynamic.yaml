@@ -1,0 +1,16 @@
+http:
+  middlewares:
+    simpleAuth:
+      basicAuth:
+        users:
+          - 'admin:$apr1$ga0B7bwD$lsj3lfQPd8BSGLphJa93v0'
+  routers:
+    api:
+      rule: Host(`monitor.valtor.fi`)
+      entrypoints:
+        - websecure
+      middlewares:
+        - simpleAuth
+      service: api@internal
+      tls:
+        certResolver: lets-encrypt
