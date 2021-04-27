@@ -21,4 +21,4 @@ providers:
     watch: true
     network: web
   file:
-    filename: traefik_dynamic.toml
+    filename: traefik_dynamic.yaml
