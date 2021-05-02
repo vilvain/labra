@@ -11,9 +11,9 @@ entryPoints:
 api:
   dashboard: true
 certificatesResolvers:
-  lets-encrypt:
+  resolveri:
     acme:
-      email: your_email@your_domain
+      email: ville.vainikka@valtori.fi
       storage: acme.json
       tlsChallenge: {}
 providers:

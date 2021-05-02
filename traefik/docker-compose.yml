@@ -9,10 +9,10 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.resolveri.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.myresolver.acme.email=ville.vainikka@valtori.fi"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.resolveri.acme.email=ville.vainikka@valtori.fi"
+      - "--certificatesresolvers.resolveri.acme.storage=/acme.json"
     ports:
     container_name: "traefik"
     ports:
@@ -31,4 +31,4 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.whoami.rule=Host(`dmarc.valtor.fi`)"
         - "traefik.http.routers.whoami.entrypoints=websecure"
-        - "traefik.http.routers.whoami.tls.certresolver=myresolver"
+        - "traefik.http.routers.whoami.tls.certresolver=resolveri"
