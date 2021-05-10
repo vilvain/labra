@@ -25,8 +25,6 @@ services:
       - $PWD/traefik.yaml:/traefik.yaml
       - $PWD/traefik_dynamic.yaml:/traefik_dynamic.yaml
       - $PWD/acme.json:/acme.json
-    networks:
-      - traefik-lan
 
 #  whoami:
 #    image: "traefik/whoami"
