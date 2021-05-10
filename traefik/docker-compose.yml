@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.5'
 
 services:
   reverse-proxy:
@@ -13,7 +13,6 @@ services:
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.resolveri.acme.email=ville.vainikka@valtori.fi"
       - "--certificatesresolvers.resolveri.acme.storage=/acme.json"
-    ports:
     container_name: "traefik"
     ports:
         - 80:80
