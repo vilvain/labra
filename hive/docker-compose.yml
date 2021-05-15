@@ -49,7 +49,7 @@ services:
     ports:
       - "0.0.0.0:9000:9000"
     command: --cortex-port 9001
-    container_name: "hive"
+    container_name: "hive-thehive"
     networks:
 #      - default
       - traefik-lan
