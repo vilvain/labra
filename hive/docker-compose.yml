@@ -31,7 +31,7 @@ services:
       - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
-    container_name: "hive-cortex"      
+    container_name: "hive-cortex"
     networks:
 #      - default
       - traefik-lan
