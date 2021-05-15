@@ -15,6 +15,9 @@ services:
       nofile:
         soft: 65536
         hard: 65536
+    networks:
+      - default
+      - traefik-lan
 #    volumes:
 #      - /opt/eldata:/usr/share/elasticsearch/data
 #    ports:
