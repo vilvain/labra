@@ -40,6 +40,6 @@ services:
     labels:
     - "traefik.enable=true"
 #        - "traefik.http.services.dmarc-grafana.loadbalancer.server.port=3000"
-    - "traefik.http.routers.dmarc-grafana.rule=Host(`hive.valtor.fi`)"
-    - "traefik.http.routers.dmarc-grafana.entrypoints=websecure"
-    - "traefik.http.routers.dmarc-grafana.tls.certresolver=resolveri"
+    - "traefik.http.routers.router-hive.rule=Host(`hive.valtor.fi`)"
+    - "traefik.http.routers.router-hive.entrypoints=websecure"
+    - "traefik.http.routers.router-hive.tls.certresolver=resolveri"
