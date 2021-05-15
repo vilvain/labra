@@ -1,8 +1,8 @@
 version: "3.5"
 networks:
+  hive-lan:
   traefik-lan:
     external: true
-
 services:
   hive-elasticsearch:
     image: elasticsearch:7.9.1
@@ -15,7 +15,7 @@ services:
         hard: 65536
     container_name: "hive-elastic"
     networks:
-      - traefik-lan
+      - hive-lan
 
   hive-cortex:
     image: thehiveproject/cortex:latest
@@ -25,6 +25,7 @@ services:
       - "0.0.0.0:9001:9001"
     container_name: "hive-cortex"
     networks:
+      - hive-lan
       - traefik-lan
     labels:
       - "traefik.enable=true"
@@ -42,6 +43,7 @@ services:
     command: --cortex-port 9001
     container_name: "hive-thehive"
     networks:
+      - hive-lan
       - traefik-lan
     labels:
     - "traefik.enable=true"
