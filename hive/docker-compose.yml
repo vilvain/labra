@@ -50,3 +50,4 @@ services:
     - "traefik.http.routers.router-hive.rule=Host(`hive.valtor.fi`)"
     - "traefik.http.routers.router-hive.entrypoints=websecure"
     - "traefik.http.routers.router-hive.tls.certresolver=resolveri"
+    - "traefik.docker.network=traefik-ulko"
