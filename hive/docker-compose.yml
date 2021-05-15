@@ -4,7 +4,7 @@ networks:
     external: true
 
 services:
-  hive-elastic:
+  hive-elasticsearch:
     image: elasticsearch:7.9.1
     environment:
       - http.host=0.0.0.0
