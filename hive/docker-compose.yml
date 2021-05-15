@@ -24,6 +24,8 @@ services:
     ports:
       - "0.0.0.0:9001:9001"
     container_name: "hive-cortex"
+    links:
+      - "hive-elasticsearch:elasticsearch"
     networks:
       - sisa
       - traefik-ulko
@@ -42,6 +44,8 @@ services:
       - "0.0.0.0:9000:9000"
     command: --cortex-port 9001
     container_name: "hive-thehive"
+    links:
+      - "hive-elasticsearch:elasticsearch"
     networks:
       - sisa
       - traefik-ulko
