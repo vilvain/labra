@@ -34,6 +34,7 @@ services:
       - "traefik.http.routers.router-cortex.rule=Host(`cortex.valtor.fi`)"
       - "traefik.http.routers.router-cortex.entrypoints=websecure"
       - "traefik.http.routers.router-cortex.tls.certresolver=resolveri"
+      - "traefik.docker.network=traefik-ulko"
 
   hive-thehive:
     image: thehiveproject/thehive:latest
