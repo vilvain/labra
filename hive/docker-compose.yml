@@ -6,16 +6,10 @@ networks:
   
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.0
+    image: elasticsearch:7.9.1
     environment:
       - http.host=0.0.0.0
-      - transport.host=0.0.0.0
-      - xpack.security.enabled=false
-      - cluster.name=hive
-      - script.allowed_types=inline
-      - thread_pool.index.queue_size=100000
-      - thread_pool.search.queue_size=100000
-      - thread_pool.bulk.queue_size=100000
+      - discovery.type=single-node
     ulimits:
       nofile:
         soft: 65536
@@ -28,6 +22,8 @@ services:
 
   cortex:
     image: thehiveproject/cortex:latest
+    depends_on:
+      - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
 
@@ -38,6 +34,7 @@ services:
       - cortex
     ports:
       - "0.0.0.0:9000:9000"
+    command: --cortex-port 9001
     labels:
     - "traefik.enable=true"
 #        - "traefik.http.services.dmarc-grafana.loadbalancer.server.port=3000"
