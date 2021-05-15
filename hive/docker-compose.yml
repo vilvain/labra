@@ -4,7 +4,7 @@ networks:
     external: true
 
 services:
-  elasticsearch:
+  hive-elastic:
     image: elasticsearch:7.9.1
     environment:
       - http.host=0.0.0.0
@@ -17,10 +17,10 @@ services:
     networks:
       - traefik-lan
 
-  cortex:
+  hive-cortex:
     image: thehiveproject/cortex:latest
     depends_on:
-      - elasticsearch
+      - hive-elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
     container_name: "hive-cortex"
@@ -32,15 +32,15 @@ services:
       - "traefik.http.routers.router-cortex.entrypoints=websecure"
       - "traefik.http.routers.router-cortex.tls.certresolver=resolveri"
 
-  thehive:
+  hive-thehive:
     image: thehiveproject/thehive:latest
     depends_on:
-      - elasticsearch
-      - cortex
+      - hive-elasticsearch
+      - hive-cortex
     ports:
       - "0.0.0.0:9000:9000"
     command: --cortex-port 9001
-    container_name: "hive"
+    container_name: "hive-thehive"
     networks:
       - traefik-lan
     labels:
