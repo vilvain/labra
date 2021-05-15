@@ -27,9 +27,9 @@ services:
       - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
-      networks:
-        - default
-        - traefik-lan
+    networks:
+      - default
+      - traefik-lan
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.router-cortex.rule=Host(`cortex.valtor.fi`)"
