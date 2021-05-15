@@ -1,7 +1,7 @@
 version: "3.5"
 networks:
-  hive-lan:
-  traefik-lan:
+  sisa:
+  traefik-ulko:
     external: true
 services:
   hive-elasticsearch:
@@ -15,7 +15,7 @@ services:
         hard: 65536
     container_name: "hive-elastic"
     networks:
-      - hive-lan
+      - sisa
 
   hive-cortex:
     image: thehiveproject/cortex:latest
@@ -25,8 +25,8 @@ services:
       - "0.0.0.0:9001:9001"
     container_name: "hive-cortex"
     networks:
-      - hive-lan
-      - traefik-lan
+      - sisa
+      - traefik-ulko
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.router-cortex.rule=Host(`cortex.valtor.fi`)"
@@ -43,8 +43,8 @@ services:
     command: --cortex-port 9001
     container_name: "hive-thehive"
     networks:
-      - hive-lan
-      - traefik-lan
+      - sisa
+      - traefik-ulko
     labels:
     - "traefik.enable=true"
     - "traefik.http.routers.router-hive.rule=Host(`hive.valtor.fi`)"

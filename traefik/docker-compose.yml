@@ -2,7 +2,7 @@ version: '3.5'
 networks:
   default:
     external:
-      name: traefik-lan
+      name: traefik-ulko
 services:
   reverse-proxy:
     image: traefik:v2.4
