@@ -1,4 +1,4 @@
-version: "3.5"
+version: "2"
 networks:
   default:
     external: true
@@ -6,13 +6,13 @@ networks:
   
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.0
     environment:
       - http.host=0.0.0.0
       - transport.host=0.0.0.0
       - xpack.security.enabled=false
       - cluster.name=hive
-      - script.inline=true
+      - script.allowed_types=inline
       - thread_pool.index.queue_size=100000
       - thread_pool.search.queue_size=100000
       - thread_pool.bulk.queue_size=100000
