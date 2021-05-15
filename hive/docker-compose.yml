@@ -27,7 +27,15 @@ services:
       - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
-
+      networks:
+        - default
+        - traefik-lan
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-cortex.rule=Host(`cortex.valtor.fi`)"
+      - "traefik.http.routers.router-cortex.entrypoints=websecure"
+      - "traefik.http.routers.router-cortex.tls.certresolver=resolveri"
+    
   thehive:
     image: thehiveproject/thehive:latest
     depends_on:
@@ -41,7 +49,6 @@ services:
       - traefik-lan
     labels:
     - "traefik.enable=true"
-#        - "traefik.http.services.dmarc-grafana.loadbalancer.server.port=3000"
     - "traefik.http.routers.router-hive.rule=Host(`hive.valtor.fi`)"
     - "traefik.http.routers.router-hive.entrypoints=websecure"
     - "traefik.http.routers.router-hive.tls.certresolver=resolveri"
