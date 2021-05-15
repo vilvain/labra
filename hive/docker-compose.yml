@@ -1,8 +1,9 @@
 version: "2"
 networks:
   default:
+    name: hive-lan
+  traefik-lan:
     external: true
-    name: traefik-lan
   
 services:
   elasticsearch:
@@ -35,6 +36,9 @@ services:
     ports:
       - "0.0.0.0:9000:9000"
     command: --cortex-port 9001
+    networks:
+      - hive-lan
+      - traefik-lan
     labels:
     - "traefik.enable=true"
 #        - "traefik.http.services.dmarc-grafana.loadbalancer.server.port=3000"
