@@ -37,7 +37,7 @@ services:
       - "0.0.0.0:9000:9000"
     command: --cortex-port 9001
     networks:
-      - hive-lan
+      - default
       - traefik-lan
     labels:
     - "traefik.enable=true"
