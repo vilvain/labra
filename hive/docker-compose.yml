@@ -19,10 +19,15 @@ services:
       nofile:
         soft: 65536
         hard: 65536
+    ports:
+      - "9201:9200"
+      - "9301:9300"
+
   cortex:
     image: thehiveproject/cortex:latest
     ports:
       - "0.0.0.0:9001:9001"
+
   thehive:
     image: thehiveproject/thehive:latest
     depends_on:
@@ -30,6 +35,8 @@ services:
       - cortex
     ports:
       - "0.0.0.0:9000:9000"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9201
     labels:
     - "traefik.enable=true"
 #        - "traefik.http.services.dmarc-grafana.loadbalancer.server.port=3000"
