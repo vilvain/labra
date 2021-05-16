@@ -1,0 +1,59 @@
+version: "3.5"
+networks:
+  sisa:
+  traefik-ulko:
+    external: true
+
+services:
+  hive4-elasticsearch:
+    image: elasticsearch:7.9.1
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    container_name: "hive4-elastic"
+    networks:
+      - sisa
+
+  hive4-cortex:
+    image: thehiveproject/cortex:latest
+    depends_on:
+      - hive4-elasticsearch
+    ports:
+      - "0.0.0.0:9001:9001"
+    container_name: "hive4-cortex"
+    links:
+      - "hive4-elasticsearch:elasticsearch"
+    networks:
+      - sisa
+      - traefik-ulko
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.router-cortex.rule=Host(`cortex3.valtor.fi`)"
+      - "traefik.http.routers.router-cortex.entrypoints=websecure"
+      - "traefik.http.routers.router-cortex.tls.certresolver=resolveri"
+      - "traefik.docker.network=traefik-ulko"
+
+  hive4-thehive:
+    image: thehiveproject/thehive4:latest
+    depends_on:
+      - hive4-elasticsearch
+      - hive4-cortex
+    ports:
+      - "0.0.0.0:9000:9000"
+    command: --cortex-port 9001
+    container_name: "hive4-thehive"
+    links:
+      - "hive4-elasticsearch:elasticsearch"
+    networks:
+      - sisa
+      - traefik-ulko
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.router-hive.rule=Host(`hive3.valtor.fi`)"
+    - "traefik.http.routers.router-hive.entrypoints=websecure"
+    - "traefik.http.routers.router-hive.tls.certresolver=resolveri"
+    - "traefik.docker.network=traefik-ulko"
