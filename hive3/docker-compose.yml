@@ -3,6 +3,7 @@ networks:
   sisa:
   traefik-ulko:
     external: true
+
 services:
   hive3-elasticsearch:
     image: elasticsearch:7.9.1
@@ -13,7 +14,7 @@ services:
       nofile:
         soft: 65536
         hard: 65536
-    container_name: "hive3-elastic"
+    container_name: "hive3-elasticsearch"
     networks:
       - sisa
 
@@ -37,7 +38,7 @@ services:
       - "traefik.docker.network=traefik-ulko"
 
   hive3-thehive:
-    image: thehiveproject/thehive4:latest
+    image: thehiveproject/thehive:latest
     depends_on:
       - hive3-elasticsearch
       - hive3-cortex
